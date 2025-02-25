@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+/* Method: Get (usado para validações não importantes); Post (usado para validações importantes) */
+/* Auto-complete (usado para autocompletar inputs com base em parâmetros) */
+/* O Label é ligado ao ID */
+/* O require é usado para ser uma obrigação para o formulário ser enviado */
+/* Placeholder é um texto base enquanto o usuário não digita nada */
+/* Value é o valor inicial exibido no campo de entrada */
+
+/* Configurações Gerais */
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: rgba(211, 211, 211, 0.184);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Configurações do Formulário */
+
+h1 {
+    text-align: center;
+    color: #4a4e69;
+    margin: 40px 0 10px 0;
+}
+
+form {
+    width: 600px;
+    margin: 10px auto;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+fieldset {
+    border: 2px solid rgb(104, 28, 104);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+legend {
+    color: rgb(104, 28, 104);
+    font: normal bold 18px arial, helvetica, sans-serif;
+}
+
+div {
+    margin: 0 0 15px 0;
+}
+
+label {
+    display: block;
+    color: #4a4e69;
+    margin: 6px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="time"],
+input[type="number"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+optgroup {
+    font: normal bold 18px;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    background-color: #4a4e69;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    background-color: #22223b;
+}
+
+.final {
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+}
+
+#enviar {
+    margin: 10px;
+}
+
+#limpar {
+    margin: 10px;
+}
+
+/* Mensagem de erro para validação */
+
+.error {
+    color: rgb(145, 3, 3);
+    font-size: 12px;
+    margin: 5px;
+    max-width: 200px;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pr-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulários</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Formulário</h1>
+    <form action="cadastro.php" method="post" autocomplete="on" id="form">
+        <fieldset class="dados_pessoal input-container">
+            <!-- Usado para agrupar elementos relacionais dentro de um formulário -->
+            <!-- Dados Padrões -->
+            <legend>Dados Pessoais</legend>
+
+            <div class="input-box">
+                <!-- O "FOR" deve ser igual ao "ID" para uma melhor conexão dentro do formulário-->
+                <label for="inome">Nome:</label>
+                <input type="text" name="nome" id="inome" placeholder="Nome" autocomplete="username">
+                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+            </div>
+
+            <div class="input-box">
+                <label for="isobrenome">Sobrenome:</label>
+                <input type="text" name="sobrenome" id="isobrenome" placeholder="Sobrenome" autocomplete="family-name">
+                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+            </div>
+
+            <div class="input-box">
+                <label for="isenha">Senha:</label>
+                <input type="password" name="senha" id="isenha" placeholder="Senha" autocomplete="current-password">
+                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+            </div>
+
+            <div class="input-box">
+                <label for="iemail">E-mail:</label>
+                <input type="email" name="email" id="iemail" placeholder="E-mail" autocomplete="email">
+                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+            </div>
+
+            <div class="input-box">
+                <label for="ihora">Hora: </label>
+                <input type="time" name="hora" id="ihora">
+                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+            </div>
+            <div class="input-box">
+                <label for="imedia">Média: </label>
+                <input type="number" name="media" id="imedia" value="5" step="0.1">
+                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+            </div>
+            
+        </fieldset>
+        <!-- Tipo Radio - Apenas uma opção pode ser escolhida -->
+        <!-- OBS: O "name" deve ser igual-->
+        <fieldset class="sexo">
+            <legend>Sexo</legend>
+            <label for="isexmax">Masculino</label>
+            <input type="radio" name="sexo" id="isexmax">
+            <br>
+            <label for="isexfem">Feminino</label>
+            <input type="radio" name="sexo" id="isexfem">
+        </fieldset>
+        <!-- Tipo checbox - Pode marcar quantos eu quiser -->
+        <fieldset class="esportes_favoritos">
+            <legend>Esportes Favoritos</legend>
+            <label for="ifut">Futebol</label>
+            <input type="checkbox" name="fut" id="ifut"><br>
+            <label for="ibas">Basquete</label>
+            <input type="checkbox" name="bas" id="ibas"><br>
+            <label for="inat">Natação</label>
+            <input type="checkbox" name="nat" id="inat"><br>
+            <label for="ite">Tenis</label>
+            <input type="checkbox" name="te" id="ite"><br>
+        </fieldset>
+        <!-- Tipo file - Enviar um aquivo dentro do formulário -->
+        <fieldset class="foto">
+            <div>
+                <label for="ifoto">Escolha uma foto de perfil: </label>
+                <input type="file" name="foto" id="ifoto">
+            </div>
+        </fieldset>
+        <fieldset class="profissao">
+            <legend>Profissão</legend>
+            <div id="profissoes">
+                <label for="iprof">Profissão: </label>
+                <input type="text" name="prof" id="iprof" list="ltprof">
+                <datalist id="ltprof">
+                    <option value="Contabilista">Contabilista</option>
+                    <option value="Jornalista">Jornalista</option>
+                    <option value="Desenvolvedor">Desenvolvedor</option>
+                    <option value="Professor">Professor</option>
+                    <option value="Administrador">Administrador</option>
+                </datalist>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Estados</legend>
+            <label for="iest">Estados</label>
+            <select name="estado" id="iest">
+                <option value="">------- Escolha -------</option>
+                <optgroup> <!-- Agrupamento de opções -->
+                    <option value="PR">Parana</option>
+                    <option value="SP">Sao Paulo</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="AC">Acre</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="SC">Santa Catarina</option>
+                </optgroup>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Mensagem</legend>
+            <label for="imsg">Mensagem: </label>
+            <textarea name="msg" id="imsg" cols="20" rows="10"></textarea><br>
+        </fieldset>
+        <div class="final">
+            <input type="submit" value="Enviar" id="enviar">
+            <input type="reset" value="Limpar" id="limpar">
+        </div>
+        <!-- Estudar mais sobre RegEx -->
+    </form>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
