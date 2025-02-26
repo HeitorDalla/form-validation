@@ -33,6 +33,23 @@ const formData = {
     }
 }
 
+// Função de pegar o elementos de erro
+function getElementDOM (field) {
+    const inputBox = field.element.closest(".input-box");
+    const errorSpan = inputBox.querySelector(".error");
+    return errorSpan;
+}
+
+// Função para mostrar o erros
+function showError (fild, errorMassage) {
+    fild.errorElement.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${errorMassage}`;
+}
+
+// Função para limpar erros
+function clearError (fild) {
+    fild.errorElement.innerHTML = '';
+}
+
 const form = document.querySelector("#form");
 
 form.addEventListener("submit", (event) => {
@@ -56,20 +73,6 @@ form.addEventListener("submit", (event) => {
         errorSpanSurname.innerHTML = `${errorIcon} ${surnameIsValid(surnameValue).errorMassage}`;
     }
 })
-
-// Função de pegar o elementos de erro
-function getElementDOM (field) {
-    const inputBox = field.element.closest(".input-box");
-    const errorSpan = inputBox.querySelector(".error");
-    return errorSpan;
-}
-
-// Função para mostrar o erro
-function showError (fild, errorMassage) {
-    fild.errorElement.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${errorMassage}`;
-}
-
-// Função para limpar
 
 // Validação para ver se os dados são vazios
 function isEmpty (value) {
