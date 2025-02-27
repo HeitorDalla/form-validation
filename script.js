@@ -1,154 +1,98 @@
 "use strict";
 
-const formData = {
-    nome: {
-        element: document.querySelector("#inome"),
-        elementValue: document.querySelector("#inome").value,
-        errorMassage: null,
-        errorMassage: ''
-    },
-    sobrenome: {
-        element: document.querySelector("#"),
-        elementValue: document.querySelector("#isobrenome").value,
-        errorMassage: null,
-        errorMassage: ''
-    },
-    senha: {
-        element: document.querySelector("#isenha"),
-        elementValue: document.querySelector("#isenha").value, 
-        errorMassage: null,
-        errorMassage: ''
-    }, 
-    email: {
-        element: document.querySelector("#iemail"),
-        elementValue: document.querySelector("#iemail").value,
-        errorMassage: null,
-        errorMassage: ''
-    },
-    hora: {
-        element: document.querySelector("#ihora"),
-        elementValue: document.querySelector("#ihora").value,
-        errorMassage: null,
-        errorMassage: ''
-    }
-}
-
-// Função de pegar o elementos de erro
-function getElementDOM (field) {
-    const inputBox = field.element.closest(".input-box");
-    const errorSpan = inputBox.querySelector(".error");
-    return errorSpan;
-}
-
-// Função para mostrar o erros
-function showError (fild, errorMassage) {
-    fild.errorElement.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${errorMassage}`;
-}
-
-// Função para limpar erros
-function clearError (fild) {
-    fild.errorElement.innerHTML = '';
-}
-
 const form = document.querySelector("#form");
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
+form.addEventListener("submit", (evento) => {
+    evento.preventDefault(); // Impede do formulário ser enviado automaticamente
 
-    const name = document.querySelector("#inome");
-    const nameValue = name.value;
+    // Pegar nome
+    const nome = document.querySelector("#inome");
+    const nomeValue = nome.value;
 
-    getElementDOM();
+    // Pegar o local para mostrar o erro
+    const inputBox = nome.closest("#input-box");
+    const errorSpan = inputBox.querySelector(".error");
 
-    if (!nameIsValid(nameValue).isValid) {
-        errorSpanName.innerHTML = `${errorIcon} ${nameIsValid(nameValue).errorMassage}`;
-    }
+    // Ícone de erro
+    const iconError = // Colocar icone de erro
 
-    const surname = document.querySelector("#isobrenome");
-    const surnameValue = surname.value;
+    // Pegar senha
+    const password = document.querySelector("#isenha");
+    const passwordValue = password.value;
 
-    getElementDOM();
 
-    if (!surnameIsValid(surnameValue).isValid) {
-        errorSpanSurname.innerHTML = `${errorIcon} ${surnameIsValid(surnameValue).errorMassage}`;
-    }
+
 })
 
-// Validação para ver se os dados são vazios
+// Função para ver se o valor é vazio
 function isEmpty (value) {
-    if (value === '') {
-        return true;
-    } else {
-        return false;
-    };
+    return value === ''; // Se o valor for vazio, ele retorna 'TRUE'
 }
 
-// Validação para o nome
-function nameIsValid (value) {
+// Função para validar o nome e sobrenome
+function IsValidName (value) {
     const validatorName = {
         isValid: true,
         errorMassage: null
     };
 
+    // Mensagem caso o campo esteja vazio
     if (isEmpty(value)) {
         validatorName.isValid = false;
-        validatorName.errorMassage = 'O campo é obrigatório!';
+        validatorName.errorMassage = 'O campo esta vazio! Por favor escreva algo!';
         return validatorName;
     }
 
-    // Validação se tem no mínimo 3 caracteres
-    const minCaracter = 3;
-    if(value.length < minCaracter) {
+    // Mensagem caso o campo tenha menos de 3 caracteres
+    const mim = 3;
+    if (value.length < min) {
         validatorName.isValid = false;
-        validatorName.errorMassage = `O campo deve ter no mínimo ${minCaracter} caracteres!`;
+        validatorName.errorMassage = `O campo tem menos de ${min} caracteres!`;
         return validatorName;
     }
 
-    // Validação para ver se só contem letras
-    const regex = /^[a-zA-Z\s]+$/;
-    if (!regex.test(value)) {
+    // Mensagem caso o campo contenha números
+    const regex = '' // Expressao regex
+    if (!regex.test(value)) { // Caso passe pelo teste, retorna 'TRUE'
         validatorName.isValid = false;
-        validatorName.errorMassage = `O campo deve conter apenas letras!`;
+        validatorName.errorMassage = `Digite apenas letras!`;
+        return validatorName;
     }
     return validatorName;
-}
+};
 
-// Validação para o Sobrenome
-function surnameIsValid (value) {
+// Função para validar o sobrenome
+function isValidSurname (value) {
     const validatorSurname = {
         isValid: true,
         errorMassage: null
     }
 
-    if (isEmpty(value)) {
+    // Função para o campo vazio
+    if (!isEmpty(value)) {
         validatorSurname.isValid = false;
-        validatorSurname.errorMassage = 'O campo é obrigatório!';
+        validatorSurname.errorMassage = `O campo está vazio! Escreva!`;
         return validatorSurname;
     }
 
-    // Validação para no mínimo 3 caracteres
-    const minCaracter = 3;
-    if (value.length < minCaracter) {
+    // Função para ver o mínimo de caracteres
+    const min = 3;
+    if (value.length < min) {
         validatorSurname.isValid = false;
-        validatorSurname.errorMassage = `O campo deve ter no mínimo ${minCaracter} caracteres!`;
-        return validatorSurname;
+        validatorSurname.errorMassage = `O mínimo de caracteres é ${min}!`;
+        return validatorSurname; 
     }
 
-    // Validação para ver se só contem letras
-    const regex = /^[a-zA-Z\s]+$/;
+    // Função para ver se contem números
+    const regex = '' // Expressao regex
     if (!regex.test(value)) {
         validatorSurname.isValid = false;
-        validatorSurname.errorMassage = 'O campo deve conter apenas letras!';
+        validatorSurname.errorMassage = `O campo contém números!`;
+        return validatorSurname;
     }
+};
 
-    return validatorSurname;
-}
-
-// Validação para senha
-function passwordValid (value) {
-    const password = document.querySelector("#isenha");
-    const passwordValue = password.value;
-
-    getElementDOM();
-
+// Função para validar a senha
+function isValidPassword (value) {
+    
 }
