@@ -34,19 +34,6 @@ form.addEventListener("submit", (evento) => {
         errorSpanSurname.innerHTML = `${iconError} ${surnameValidation.errorMessage}`;
     };
 
-    // Senha
-    const password = document.querySelector("#isenha");
-    const passwordValue = password.value;
-
-    const inputBoxPassword = password.closest(".input-box");
-    const errorSpanPassword = inputBoxPassword.querySelector(".error");
-
-    const passwordValidation = isValidPassword(passwordValue);
-    if (!passwordValidation.isValid) {
-        formIsValiD = false;
-        errorSpanPassword.innerHTML = `${iconError} ${passwordValidation.errorMessage}`;
-    };
-
     // Email
     const email = document.querySelector("#iemail");
     const emailValue = email.value
@@ -73,7 +60,7 @@ form.addEventListener("submit", (evento) => {
         errorSpanTelephone.innerHTML = `${iconError} ${telephoneValidation.errorMessage}`;
     };
 
-    // Hora
+    // Data
     const date = document.querySelector("#idata");
     const dateValue = date.value;
 
@@ -85,6 +72,22 @@ form.addEventListener("submit", (evento) => {
         formIsValiD = false;
         errorSpanDate.innerHTML = `${iconError} ${dateValidation.errorMessage}`
     };
+
+    // Senha
+    const password = document.querySelector("#isenha");
+    const passwordValue = password.value;
+
+    const inputBoxPassword = password.closest(".input-box");
+    const errorSpanPassword = inputBoxPassword.querySelector(".error");
+
+    const passwordValidation = isValidPassword(passwordValue);
+    if (!passwordValidation.isValid) {
+        formIsValiD = false;
+        errorSpanPassword.innerHTML = `${iconError} ${passwordValidation.errorMessage}`;
+    };
+
+    // Confirmar senha
+
 
     // Formulário
     if (formIsValiD) {
@@ -109,7 +112,7 @@ function regularExpressions () {
     };
 };
 
-// Função para validar o nome e sobrenome
+// Função para validar o nome
 function isValidName (value) {
     const validatorName = {
         isValid: true,
@@ -171,37 +174,6 @@ function isValidSurname (value) {
     return validatorSurname;
 };
 
-// Função para validar a senha
-function isValidPassword (value) {
-    const validatorPassword = {
-        isValidPassword: true,
-        errorMessage: null
-    };
-
-    // Caso esteje vazio
-    if (isEmpty(value)) {
-        validatorPassword.isValidPassword = false;
-        validatorPassword.errorMessage = `O campo esta vazio!`;
-        return validatorPassword;
-    };
-
-    // Caso tenha menos de 6 caracteres
-    const min = 8;
-    if (value.length < min) {
-        validatorPassword.isValidPassword = false;
-        validatorPassword.errorMessage = 'O campo possui menos de 6 caracteres!';
-        return validatorPassword;
-    };
-
-    // Validação para senha: 1 caracter minúsculo, 1 caracter maiusculo, 1 numero, e pelo menos 1 caracter especial (@, #, !, $, %), não pode conter espaços em branco
-    if (!(regularExpressions().senha).test(value)) {
-        validatorPassword.isValidPassword = false;
-        validatorPassword.errorMessage = `A senha deve conter pelo menos 1 caractere minúsculo, maiúsculo, especial e não deve conter espaços em branco!`
-        return validatorPassword;
-    };
-    return validatorPassword;
-};
-
 // Função para validar email
 function isValidEmail (value) {
     const validatorEmail = {
@@ -246,5 +218,55 @@ function isValidTelephone (value) {
 
 // Função para validar a data
 function isValidDate (value) {
+    const validatorDate = {
+        isValid: true,
+        errorMessage: null
+    }
 
-}
+    if (isEmpty(value)) {
+        validatorDate.isValid = false;
+        validatorDate.errorMessage = 'O nascimento é obrigatório!';
+        return validatorDate;
+    }
+
+    const year = new Date(value).getFullYear() // 
+    if (year < 1920 || year > new Date().getFullYear()) {
+        validatorDate.isValid = false;
+        validatorDate.errorMessage = 'Data inválida!';
+        return validatorDate;
+    }
+    return validatorDate;
+};
+
+// Função para validar a senha
+function isValidPassword (value) {
+    const validatorPassword = {
+        isValidPassword: true,
+        errorMessage: null
+    };
+
+    // Caso esteje vazio
+    if (isEmpty(value)) {
+        validatorPassword.isValidPassword = false;
+        validatorPassword.errorMessage = `O campo esta vazio!`;
+        return validatorPassword;
+    };
+
+    // Caso tenha menos de 6 caracteres
+    const min = 8;
+    if (value.length < min) {
+        validatorPassword.isValidPassword = false;
+        validatorPassword.errorMessage = 'O campo possui menos de 6 caracteres!';
+        return validatorPassword;
+    };
+
+    // Validação para senha: 1 caracter minúsculo, 1 caracter maiusculo, 1 numero, e pelo menos 1 caracter especial (@, #, !, $, %), não pode conter espaços em branco
+    if (!(regularExpressions().senha).test(value)) {
+        validatorPassword.isValidPassword = false;
+        validatorPassword.errorMessage = `A senha deve conter pelo menos 1 caractere minúsculo, maiúsculo, especial e não deve conter espaços em branco!`
+        return validatorPassword;
+    };
+    return validatorPassword;
+};
+
+// Função para confirmar a senha

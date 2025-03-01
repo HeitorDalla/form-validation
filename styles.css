@@ -64,7 +64,6 @@ label {
 input[type="text"],
 input[type="password"],
 input[type="email"],
-input[type="file"],
 input[type="tel"],
 input[type="date"],
 select,
@@ -74,19 +73,6 @@ textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-input[type="radio"],
-input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-textarea {
-    resize: vertical;
-}
-
-optgroup {
-    font: normal bold 18px;
 }
 
 input[type="submit"],
