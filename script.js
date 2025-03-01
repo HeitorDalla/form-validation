@@ -74,16 +74,16 @@ form.addEventListener("submit", (evento) => {
     };
 
     // Hora
-    const time = document.querySelector("#ihora");
-    const timeValue = time.value;
+    const date = document.querySelector("#idata");
+    const dateValue = date.value;
 
-    const inputBoxTime = time.closest(".input-box");
-    const errorSpanTime = inputBoxEmail.querySelector(".error");
+    const inputBoxDate = date.closest(".input-box");
+    const errorSpanDate = inputBoxDate.querySelector(".error");
 
-    const timeValidation = isValidTime(timeValue);
-    if (!timeValidation.isValid) {
+    const dateValidation = isValidDate(dateValue);
+    if (!dateValidation.isValid) {
         formIsValiD = false;
-        errorSpanTime.innerHTML = `${iconError} ${timeValidation.errorMessage}`
+        errorSpanDate.innerHTML = `${iconError} ${dateValidation.errorMessage}`
     };
 
     // Formulário
@@ -99,7 +99,7 @@ function isEmpty (value) {
 };
 
 // Função para expressões regulares
-function expressoesRegulares () {
+function regularExpressions () {
     return {
         apenasLetras: /^[a-zA-Z]+$/,
         senha: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/,
@@ -132,9 +132,9 @@ function isValidName (value) {
     };
 
     // Mensagem caso o campo contenha números
-    if (!(expressoesRegulares().apenasLetras).test(value)) {
+    if (!(regularExpressions().apenasLetras).test(value)) {
         validatorName.isValid = false;
-        validatorName.errorMessage = `Digite apenas letras!`;
+        validatorName.errorMessage = `O campo contém números!`;
         return validatorName;
     };
     return validatorName;
@@ -163,7 +163,7 @@ function isValidSurname (value) {
     };
 
     // Função para ver se contem números
-    if (!(expressoesRegulares().apenasLetras).test(value)) {
+    if (!(regularExpressions().apenasLetras).test(value)) {
         validatorSurname.isValid = false;
         validatorSurname.errorMessage = `O campo contém números!`;
         return validatorSurname;
@@ -194,7 +194,7 @@ function isValidPassword (value) {
     };
 
     // Validação para senha: 1 caracter minúsculo, 1 caracter maiusculo, 1 numero, e pelo menos 1 caracter especial (@, #, !, $, %), não pode conter espaços em branco
-    if (!(expressoesRegulares().senha).test(value)) {
+    if (!(regularExpressions().senha).test(value)) {
         validatorPassword.isValidPassword = false;
         validatorPassword.errorMessage = `A senha deve conter pelo menos 1 caractere minúsculo, maiúsculo, especial e não deve conter espaços em branco!`
         return validatorPassword;
@@ -204,15 +204,47 @@ function isValidPassword (value) {
 
 // Função para validar email
 function isValidEmail (value) {
-    
+    const validatorEmail = {
+        isValid: true,
+        errorMessage: null
+    }
+
+    if (isEmpty(value)) {
+        validatorEmail.isValid = false;
+        validatorEmail.errorMessage = `O campo está vazio!`;
+        return validatorEmail;
+    }
+
+    if (!(regularExpressions().email).test(value)) {
+        validatorEmail.isValid = false;
+        validatorEmail.errorMessage = `O email precisa ser válido!`;
+        return validatorEmail;
+    }
+    return validatorEmail;
 };
 
 // Função para validar números de telefone
 function isValidTelephone (value) {
-    
+    const validatorTelephone = {
+        isValid: true,
+        errorMessage: null
+    }
+
+    if (isEmpty(value)) {
+        validatorTelephone.isValid = false;
+        validatorTelephone.errorMessage = `O campo esta vazio!`;
+        return validatorTelephone;
+    }
+
+    if (!(regularExpressions().telefone).test(value)) {
+        validatorTelephone.isValid = false;
+        validatorTelephone.errorMessage = `O telefone precisa ser válido!`;
+        return validatorTelephone;
+    }
+    return validatorTelephone;
 };
 
-// Função para validar a hora
-function isValidTime (value) {
+// Função para validar a data
+function isValidDate (value) {
 
 }
