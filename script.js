@@ -47,6 +47,45 @@ form.addEventListener("submit", (evento) => {
         errorSpanPassword.innerHTML = `${iconError} ${passwordValidation.errorMessage}`;
     };
 
+    // Email
+    const email = document.querySelector("#iemail");
+    const emailValue = email.value
+
+    const inputBoxEmail = email.closest(".input-box");
+    const errorSpanEmail = inputBoxEmail.querySelector(".error");
+
+    const emailValidation = isValidEmail(emailValue);
+    if (!emailValidation.isValid) {
+        formIsValiD = false;
+        errorSpanEmail.innerHTML = `${iconError} ${emailValidation.errorMessage}`;
+    };
+
+    // Telefone
+    const telephone = document.querySelector("#itel");
+    const telephoneValue = telephone.value;
+
+    const inputBoxTelephone = telephone.closest(".input-box");
+    const errorSpanTelephone = inputBoxTelephone.querySelector(".error");
+
+    const telephoneValidation = isValidTelephone(telephoneValue);
+    if (!telephoneValidation.isValid) {
+        formIsValiD = false;
+        errorSpanTelephone.innerHTML = `${iconError} ${telephoneValidation.errorMessage}`;
+    };
+
+    // Hora
+    const time = document.querySelector("#ihora");
+    const timeValue = time.value;
+
+    const inputBoxTime = time.closest(".input-box");
+    const errorSpanTime = inputBoxEmail.querySelector(".error");
+
+    const timeValidation = isValidTime(timeValue);
+    if (!timeValidation.isValid) {
+        formIsValiD = false;
+        errorSpanTime.innerHTML = `${iconError} ${timeValidation.errorMessage}`
+    };
+
     // Formulário
     if (formIsValiD) {
         form.submit();
@@ -64,8 +103,9 @@ function expressoesRegulares () {
     return {
         apenasLetras: /^[a-zA-Z]+$/,
         senha: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/,
-
-
+        email: /^([a-zA-Z0-9._%+-]{2,})(@)([a-zA-Z0-9.-]{2,})(\.)([a-zA-Z]{2,})(\.)([a-z]{2,})?$/,
+        telefone: /\([0-9]{2}\)\s([0-9]{4,5})\-([0-9]{4})/g,
+        hora: /./
     };
 };
 
@@ -160,14 +200,19 @@ function isValidPassword (value) {
         return validatorPassword;
     };
     return validatorPassword;
-}
+};
 
 // Função para validar email
 function isValidEmail (value) {
-    const regex = /^([a-zA-Z0-9._%+-]{2,})(@)([a-zA-Z0-9.-]{2,})(\.)([a-zA-Z]{2,})(\.)([a-z]{2,})?$/;
-}
+    
+};
 
 // Função para validar números de telefone
-function isValidPhone (value) {
-    const regex = /\([0-9]{2}\)\s([0-9]{4,5})\-([0-9]{4})/g;
+function isValidTelephone (value) {
+    
+};
+
+// Função para validar a hora
+function isValidTime (value) {
+
 }
