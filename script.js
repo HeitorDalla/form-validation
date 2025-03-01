@@ -111,7 +111,7 @@ form.addEventListener("submit", (evento) => {
 const resetButton = document.querySelector("#limpar");
 
 resetButton.addEventListener("click", (evento) => {
-    const allErrors = document.querySelector(".error");
+    const allErrors = document.querySelectorAll(".error");
     allErrors.forEach((error) => {
         error.innerHTML = ``; // Limpa os erros ao resetar o formulário
     });
@@ -125,10 +125,10 @@ function isEmpty (value) {
 // Função para expressões regulares
 function regularExpressions () {
     return {
-        apenasLetras: /^[a-zA-Z]+$/,
+        apenasLetras: /^[a-zA-Z\s]+$/,
         senha: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/,
-        email: /^([a-zA-Z0-9._%+-]{2,})(@)([a-zA-Z0-9.-]{2,})(\.)([a-zA-Z]{2,})(\.)([a-z]{2,})?$/,
-        telefone: /\([0-9]{2}\)\s([0-9]{4,5})\-([0-9]{4})/g,
+        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        telefone: /^(?:\(\d{2}\)\s?)?\d{4,5}-\d{4}$/,
         hora: /./
     };
 };
@@ -190,7 +190,7 @@ function isValidSurname (value) {
     // Função para ver se contem números
     if (!(regularExpressions().apenasLetras).test(value)) {
         validatorSurname.isValid = false;
-        validatorSurname.errorMessage = `O campo contém números!`;
+        validatorSurname.errorMessage = `O campo deve conter apenas letras!`;
         return validatorSurname;
     }
 
@@ -267,26 +267,26 @@ function isValidDate (value) {
 // Função para validar a senha
 function isValidPassword (value) {
     const validatorPassword = {
-        isValidPassword: true,
+        isValid: true,
         errorMessage: null
     }
 
     if (isEmpty(value)) {
-        validatorPassword.isValidPassword = false;
+        validatorPassword.isValid = false;
         validatorPassword.errorMessage = `A senha é obrigatória!`;
         return validatorPassword;
     }
 
     const min = 8;
     if (value.length < min) {
-        validatorPassword.isValidPassword = false;
+        validatorPassword.isValid = false;
         validatorPassword.errorMessage = 'O campo possui menos de 8 caracteres!';
         return validatorPassword;
     }
 
     // Validação para senha: 1 caracter minúsculo, 1 caracter maiusculo, 1 numero, e pelo menos 1 caracter especial (@, #, !, $, %), não pode conter espaços em branco
     if (!(regularExpressions().senha).test(value)) {
-        validatorPassword.isValidPassword = false;
+        validatorPassword.isValid = false;
         validatorPassword.errorMessage = `
             A sua senha deve conter pelo menos: <br/>
             1 letra maiúscula <br/>
@@ -303,18 +303,18 @@ function isValidPassword (value) {
 // Função para confirmar a senha
 function passwordConfirm (passwordValue, value) {
     const validatorPasswordConfirm = {
-        isValidPassword: true,
+        isValid: true,
         errorMessage: null
     }
 
     if (isEmpty(value)) {
-        validatorPasswordConfirm.isValidPassword = false;
+        validatorPasswordConfirm.isValid = false;
         validatorPasswordConfirm.errorMessage = `Confimar senha é obrigatória!`;
         return validatorPasswordConfirm;
     }
 
-    if (passwordValue != value) {
-        validatorPasswordConfirm.isValidPassword = false;
+    if (passwordValue !== value) {
+        validatorPasswordConfirm.isValid = false;
         validatorPasswordConfirm.errorMessage = `As senhas não condizem!`;
         return validatorPasswordConfirm;
     }
