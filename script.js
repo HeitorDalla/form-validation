@@ -75,7 +75,7 @@ form.addEventListener("submit", (evento) => {
 
     // Senha
     const password = document.querySelector("#isenha");
-    const passwordValue = password.value;
+    let passwordValue = password.value;
 
     const inputBoxPassword = password.closest(".input-box");
     const errorSpanPassword = inputBoxPassword.querySelector(".error");
@@ -87,7 +87,17 @@ form.addEventListener("submit", (evento) => {
     };
 
     // Confirmar senha
+    const passwordMatch = document.querySelector("#isenhaConfirmar")
+    const passwordMatchValue = passwordMatch.value
 
+    const inputBoxPasswordMatch = passwordMatch.closest(".input-box");
+    const errorSpanPasswordMatch = inputBoxPasswordMatch.querySelector(".error");
+
+    const passwordMatchValidation = isValidPassword(passwordMatchValue);
+    if (!passwordMatchValidation.isValid) {
+        formIsValiD = false;
+        errorSpanPasswordMatch.innerHTML = `${iconError} ${passwordMatchValidation.errorMessage}`;
+    };
 
     // Formulário
     if (formIsValiD) {
@@ -243,16 +253,14 @@ function isValidPassword (value) {
     const validatorPassword = {
         isValidPassword: true,
         errorMessage: null
-    };
+    }
 
-    // Caso esteje vazio
     if (isEmpty(value)) {
         validatorPassword.isValidPassword = false;
-        validatorPassword.errorMessage = `O campo esta vazio!`;
+        validatorPassword.errorMessage = `A senha é obrigatória!`;
         return validatorPassword;
     };
 
-    // Caso tenha menos de 6 caracteres
     const min = 8;
     if (value.length < min) {
         validatorPassword.isValidPassword = false;
@@ -263,10 +271,35 @@ function isValidPassword (value) {
     // Validação para senha: 1 caracter minúsculo, 1 caracter maiusculo, 1 numero, e pelo menos 1 caracter especial (@, #, !, $, %), não pode conter espaços em branco
     if (!(regularExpressions().senha).test(value)) {
         validatorPassword.isValidPassword = false;
-        validatorPassword.errorMessage = `A senha deve conter pelo menos 1 caractere minúsculo, maiúsculo, especial e não deve conter espaços em branco!`
+        validatorPassword.errorMessage = `
+            A sua senha deve conter pelo menos: <br/>
+            1 letra maiúscula <br/>
+            1 letra minúscula <br/>
+            1 número <br/>
+            1 caracter especial!
+        `;
         return validatorPassword;
     };
     return validatorPassword;
 };
 
 // Função para confirmar a senha
+function passwordConfirm (value) {
+    const validatorPasswordConfirm = {
+        isValidPassword: true,
+        errorMessage: null
+    };
+
+    if (isEmpty(value)) {
+        validatorPasswordConfirm.isValidPassword = false;
+        validatorPasswordConfirm.errorMessage = `Confimar senha é obrigatória!`;
+        return validatorPasswordConfirm;
+    };
+
+    if (passwordValue != value) {
+        validatorPasswordConfirm.isValidPassword = false;
+        validatorPasswordConfirm.errorMessage = `As senhas não condizem!`;
+        return validatorPasswordConfirm;
+    }
+    return validatorPasswordConfirm;
+};
