@@ -14,7 +14,8 @@ form.addEventListener("submit", (evento) => {
     const nomeValue = nome.value;
     
     const inputBoxName = nome.closest(".input-box");
-    const errorSpanName = inputBoxName.querySelector(".error");
+    let errorSpanName = newElement(inputBoxName);
+    errorSpanName = inputBoxName.querySelector(".error");
 
     const nameValidation = isValidName(nomeValue);
     if (!nameValidation.isValid) {
@@ -27,7 +28,8 @@ form.addEventListener("submit", (evento) => {
     const surnameValue = surname.value;
 
     const inputBoxSurname = surname.closest(".input-box");
-    const errorSpanSurname = inputBoxSurname.querySelector(".error");
+    let errorSpanSurname = newElement(inputBoxSurname)
+    errorSpanSurname = inputBoxSurname.querySelector(".error");
 
     const surnameValidation = isValidSurname(surnameValue);
     if (!surnameValidation.isValid) {
@@ -40,7 +42,8 @@ form.addEventListener("submit", (evento) => {
     const emailValue = email.value
 
     const inputBoxEmail = email.closest(".input-box");
-    const errorSpanEmail = inputBoxEmail.querySelector(".error");
+    let errorSpanEmail = newElement(inputBoxEmail)
+    errorSpanEmail = inputBoxEmail.querySelector(".error");
 
     const emailValidation = isValidEmail(emailValue);
     if (!emailValidation.isValid) {
@@ -53,7 +56,8 @@ form.addEventListener("submit", (evento) => {
     const telephoneValue = telephone.value;
 
     const inputBoxTelephone = telephone.closest(".input-box");
-    const errorSpanTelephone = inputBoxTelephone.querySelector(".error");
+    let errorSpanTelephone = newElement(inputBoxTelephone)
+    errorSpanTelephone = inputBoxTelephone.querySelector(".error");
 
     const telephoneValidation = isValidTelephone(telephoneValue);
     if (!telephoneValidation.isValid) {
@@ -66,7 +70,8 @@ form.addEventListener("submit", (evento) => {
     const dateValue = date.value;
 
     const inputBoxDate = date.closest(".input-box");
-    const errorSpanDate = inputBoxDate.querySelector(".error");
+    let errorSpanDate = newElement(inputBoxDate)
+    errorSpanDate = inputBoxDate.querySelector(".error");
 
     const dateValidation = isValidDate(dateValue);
     if (!dateValidation.isValid) {
@@ -79,7 +84,8 @@ form.addEventListener("submit", (evento) => {
     let passwordValue = password.value;
 
     const inputBoxPassword = password.closest(".input-box");
-    const errorSpanPassword = inputBoxPassword.querySelector(".error");
+    let errorSpanPassword = newElement(inputBoxPassword)
+    errorSpanPassword = inputBoxPassword.querySelector(".error");
 
     const passwordValidation = isValidPassword(passwordValue);
     if (!passwordValidation.isValid) {
@@ -92,7 +98,8 @@ form.addEventListener("submit", (evento) => {
     const passwordMatchValue = passwordMatch.value
 
     const inputBoxPasswordMatch = passwordMatch.closest(".input-box");
-    const errorSpanPasswordMatch = inputBoxPasswordMatch.querySelector(".error");
+    let errorSpanPasswordMatch = newElement(inputBoxPasswordMatch)
+    errorSpanPasswordMatch = inputBoxPasswordMatch.querySelector(".error");
 
     const passwordMatchValidation = passwordConfirm(passwordValue, passwordMatchValue);
     if (!passwordMatchValidation.isValid) {
@@ -110,12 +117,22 @@ form.addEventListener("submit", (evento) => {
 // Função para disparar o evento de reset
 const resetButton = document.querySelector("#limpar");
 
+// Função para resetar o formulário
 resetButton.addEventListener("click", (evento) => {
     const allErrors = document.querySelectorAll(".error");
     allErrors.forEach((error) => {
         error.innerHTML = ``; // Limpa os erros ao resetar o formulário
     });
 })
+
+// Função para criar o errorSpan
+function newElement (father) {
+    const novoElemento = document.createElement("span");
+    novoElemento.setAttribute("class", "error");
+    novoElemento.innerHTML = '';
+    father.appendChild(novoElemento)
+    return novoElemento;
+};
 
 // Função para ver se o valor é vazio
 function isEmpty (value) {
@@ -143,7 +160,7 @@ function isValidName (value) {
     // Mensagem caso o campo esteja vazio
     if (isEmpty(value)) {
         validatorName.isValid = false;
-        validatorName.errorMessage = 'O campo esta vazio!';
+        validatorName.errorMessage = 'O nome é obrigatório!';
         return validatorName;
     }
 
@@ -175,7 +192,7 @@ function isValidSurname (value) {
     // Função para o campo vazio
     if (isEmpty(value)) {
         validatorSurname.isValid = false;
-        validatorSurname.errorMessage = `O campo está vazio!`;
+        validatorSurname.errorMessage = `O sobrenome é obrigatório!`;
         return validatorSurname;
     }
 
@@ -206,7 +223,7 @@ function isValidEmail (value) {
 
     if (isEmpty(value)) {
         validatorEmail.isValid = false;
-        validatorEmail.errorMessage = `O campo está vazio!`;
+        validatorEmail.errorMessage = `O email é obrigatório!`;
         return validatorEmail;
     }
 
@@ -228,7 +245,7 @@ function isValidTelephone (value) {
 
     if (isEmpty(value)) {
         validatorTelephone.isValid = false;
-        validatorTelephone.errorMessage = `O campo esta vazio!`;
+        validatorTelephone.errorMessage = `O telefone é obrigatório!`;
         return validatorTelephone;
     }
 
