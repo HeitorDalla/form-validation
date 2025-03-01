@@ -5,31 +5,40 @@ const form = document.querySelector("#form");
 form.addEventListener("submit", (evento) => {
     evento.preventDefault(); // Impede do formulário ser enviado automaticamente
 
+    let formIsValiD = true;
+
     // Nome
     const nome = document.querySelector("#inome");
     const nomeValue = nome.value;
     
-    const inputBoxName = value.closest("#input-box");
+    const inputBoxName = nome.closest(".input-box");
     const errorSpanName = inputBoxName.querySelector(".error");
 
     const iconError = '<i class="fa-solid fa-circle-exclamation"></i>';
 
-    const nameValidation = IsValidName(nomeValue);
+    const nameValidation = isValidName(nomeValue);
     if (!nameValidation.isValid) { // Se ele não for válido
-        errorSpanName.innerHTML = `${iconError} ${validatorName.errorMassage}`;
+        formIsValiD = false;
+        errorSpanName.innerHTML = `${iconError} ${nameValidation.errorMessage}`;
     };
 
     // Sobrenome
     const surname = document.querySelector("#isobrenome");
     const surnameValue = surname.value;
 
-    const inputBoxSurname = value.closest("#input-box");
+    const inputBoxSurname = surname.closest(".input-box");
     const errorSpanSurname = inputBoxSurname.querySelector(".error");
 
     const surnameValidation = isValidSurname(surnameValue);
+    formIsValiD = false;
     if (!surnameValidation.isValid) {
-        errorSpanSurname.innerHTML = `${iconError} ${validatorSurname.errorMassage}`;
+        errorSpanSurname.innerHTML = `${iconError} ${surnameValidation.errorMessage}`;
     };
+
+    // Formulário
+    if (formIsValiD) {
+        form.submit();
+    }
 
 });
 
@@ -39,16 +48,16 @@ function isEmpty (value) {
 };
 
 // Função para validar o nome e sobrenome
-function IsValidName (value) {
+function isValidName (value) {
     const validatorName = {
         isValid: true,
-        errorMassage: null
+        errorMessage: null
     };
 
     // Mensagem caso o campo esteja vazio
     if (isEmpty(value)) {
         validatorName.isValid = false;
-        validatorName.errorMassage = 'O campo esta vazio! Por favor escreva algo!';
+        validatorName.errorMessage = 'O campo esta vazio! Por favor escreva algo!';
         return validatorName;
     }
 
@@ -56,7 +65,7 @@ function IsValidName (value) {
     const min = 3;
     if (value.length < min) {
         validatorName.isValid = false;
-        validatorName.errorMassage = `O campo tem menos de ${min} caracteres!`;
+        validatorName.errorMessage = `O campo tem menos de ${min} caracteres!`;
         return validatorName;
     }
 
@@ -64,7 +73,7 @@ function IsValidName (value) {
     const regex = '' // Expressao regex
     if (!regex.test(value)) { // Caso passe pelo teste, retorna 'TRUE'
         validatorName.isValid = false;
-        validatorName.errorMassage = `Digite apenas letras!`;
+        validatorName.errorMessage = `Digite apenas letras!`;
         return validatorName;
     }
     return validatorName;
@@ -74,13 +83,13 @@ function IsValidName (value) {
 function isValidSurname (value) {
     const validatorSurname = {
         isValid: true,
-        errorMassage: null
+        errorMessage: null
     }
 
     // Função para o campo vazio
     if (isEmpty(value)) {
         validatorSurname.isValid = false;
-        validatorSurname.errorMassage = `O campo está vazio! Escreva!`;
+        validatorSurname.errorMessage = `O campo está vazio! Escreva!`;
         return validatorSurname;
     }
 
@@ -88,7 +97,7 @@ function isValidSurname (value) {
     const min = 3;
     if (value.length < min) {
         validatorSurname.isValid = false;
-        validatorSurname.errorMassage = `O mínimo de caracteres é ${min}!`;
+        validatorSurname.errorMessage = `O mínimo de caracteres é ${min}!`;
         return validatorSurname; 
     }
 
@@ -96,7 +105,7 @@ function isValidSurname (value) {
     const regex = '' // Expressao regex
     if (!regex.test(value)) {
         validatorSurname.isValid = false;
-        validatorSurname.errorMassage = `O campo contém números!`;
+        validatorSurname.errorMessage = `O campo contém números!`;
         return validatorSurname;
     }
 };
