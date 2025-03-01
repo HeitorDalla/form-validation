@@ -10,52 +10,50 @@
 </head>
 
 <body>
-    <h1>Cadastro</h1>
+    <h1>Criar conta</h1>
     <form action="cadastro.php" method="post" autocomplete="on" id="form">
         <fieldset class="dados_pessoal input-container">
-
-            <legend>Dados Pessoais</legend>
 
             <div class="input-box">
                 <label for="inome">Nome:</label>
                 <input type="text" name="nome" id="inome" placeholder="Nome" autocomplete="username">
-                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+                <span class="error" aria-live="assertive"> <!--Será colocado uma mensagem de erro--> </span>
             </div>
 
             <div class="input-box">
                 <label for="isobrenome">Sobrenome:</label>
                 <input type="text" name="sobrenome" id="isobrenome" placeholder="Sobrenome" autocomplete="family-name">
-                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+                <span class="error" aria-live="assertive"> <!--Será colocado uma mensagem de erro--> </span>
             </div>
 
             <div class="input-box">
                 <label for="iemail">E-mail:</label>
                 <input type="email" name="email" id="iemail" placeholder="E-mail" autocomplete="email">
-                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+                <span class="error" aria-live="assertive"> <!--Será colocado uma mensagem de erro--> </span>
             </div>
 
             <div class="input-box">
                 <label for="itel">Telefone: </label>
                 <input type="tel" name="itel" id="itel" placeholder="(99) 99999-9999">
-                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+                <span class="error" aria-live="assertive"> <!--Será colocado uma mensagem de erro--> </span>
             </div>
 
             <div class="input-box">
                 <label for="idata">Data: </label>
                 <input type="date" name="idata" id="idata" placeholder="00/00/0000">
-                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+                <span class="error" aria-live="assertive"> <!--Será colocado uma mensagem de erro--> </span>
             </div>
 
             <div class="input-box">
                 <label for="isenha">Senha: </label>
                 <input type="password" name="senha" id="isenha" placeholder="Senha" autocomplete="current-password">
-                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+                <span class="error" aria-live="assertive"> <!--Será colocado uma mensagem de erro--> </span>
             </div>
 
             <div class="input-box">
                 <label for="isenhaConfirmar">Confirmar senha: </label>
                 <input type="password" name="isenhaConfirmar" id="isenhaConfirmar" placeholder="Confirmar senha">
-                <span class="error"> <!--Será colocado uma mensagem de erro--> </span>
+                <span class="error" aria-live="assertive"> <!--Será colocado uma mensagem de erro--> </span>
             </div>
             
         </fieldset>

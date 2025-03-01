@@ -2,6 +2,7 @@
 
 const form = document.querySelector("#form");
 
+// Evento para adicionar o botão de enviar
 form.addEventListener("submit", (evento) => {
     evento.preventDefault(); // Impede do formulário ser enviado automaticamente
 
@@ -93,7 +94,7 @@ form.addEventListener("submit", (evento) => {
     const inputBoxPasswordMatch = passwordMatch.closest(".input-box");
     const errorSpanPasswordMatch = inputBoxPasswordMatch.querySelector(".error");
 
-    const passwordMatchValidation = isValidPassword(passwordMatchValue);
+    const passwordMatchValidation = passwordConfirm(passwordValue, passwordMatchValue);
     if (!passwordMatchValidation.isValid) {
         formIsValiD = false;
         errorSpanPasswordMatch.innerHTML = `${iconError} ${passwordMatchValidation.errorMessage}`;
@@ -105,6 +106,16 @@ form.addEventListener("submit", (evento) => {
     };
 
 });
+
+// Função para disparar o evento de reset
+const resetButton = document.querySelector("#limpar");
+
+resetButton.addEventListener("click", (evento) => {
+    const allErrors = document.querySelector(".error");
+    allErrors.forEach((error) => {
+        error.innerHTML = ``; // Limpa os erros ao resetar o formulário
+    });
+})
 
 // Função para ver se o valor é vazio
 function isEmpty (value) {
@@ -127,14 +138,14 @@ function isValidName (value) {
     const validatorName = {
         isValid: true,
         errorMessage: null
-    };
+    }
 
     // Mensagem caso o campo esteja vazio
     if (isEmpty(value)) {
         validatorName.isValid = false;
         validatorName.errorMessage = 'O campo esta vazio!';
         return validatorName;
-    };
+    }
 
     // Mensagem caso o campo tenha menos de 3 caracteres
     const min = 3;
@@ -142,14 +153,15 @@ function isValidName (value) {
         validatorName.isValid = false;
         validatorName.errorMessage = `O campo tem menos de ${min} caracteres!`;
         return validatorName;
-    };
+    }
 
     // Mensagem caso o campo contenha números
     if (!(regularExpressions().apenasLetras).test(value)) {
         validatorName.isValid = false;
         validatorName.errorMessage = `O campo contém números!`;
         return validatorName;
-    };
+    }
+
     return validatorName;
 };
 
@@ -158,14 +170,14 @@ function isValidSurname (value) {
     const validatorSurname = {
         isValid: true,
         errorMessage: null
-    };
+    }
 
     // Função para o campo vazio
     if (isEmpty(value)) {
         validatorSurname.isValid = false;
         validatorSurname.errorMessage = `O campo está vazio!`;
         return validatorSurname;
-    };
+    }
 
     // Função para ver o mínimo de caracteres
     const min = 3;
@@ -173,14 +185,15 @@ function isValidSurname (value) {
         validatorSurname.isValid = false;
         validatorSurname.errorMessage = `O mínimo de caracteres é ${min}!`;
         return validatorSurname; 
-    };
+    }
 
     // Função para ver se contem números
     if (!(regularExpressions().apenasLetras).test(value)) {
         validatorSurname.isValid = false;
         validatorSurname.errorMessage = `O campo contém números!`;
         return validatorSurname;
-    };
+    }
+
     return validatorSurname;
 };
 
@@ -202,6 +215,7 @@ function isValidEmail (value) {
         validatorEmail.errorMessage = `O email precisa ser válido!`;
         return validatorEmail;
     }
+
     return validatorEmail;
 };
 
@@ -223,6 +237,7 @@ function isValidTelephone (value) {
         validatorTelephone.errorMessage = `O telefone precisa ser válido!`;
         return validatorTelephone;
     }
+
     return validatorTelephone;
 };
 
@@ -245,6 +260,7 @@ function isValidDate (value) {
         validatorDate.errorMessage = 'Data inválida!';
         return validatorDate;
     }
+
     return validatorDate;
 };
 
@@ -259,14 +275,14 @@ function isValidPassword (value) {
         validatorPassword.isValidPassword = false;
         validatorPassword.errorMessage = `A senha é obrigatória!`;
         return validatorPassword;
-    };
+    }
 
     const min = 8;
     if (value.length < min) {
         validatorPassword.isValidPassword = false;
-        validatorPassword.errorMessage = 'O campo possui menos de 6 caracteres!';
+        validatorPassword.errorMessage = 'O campo possui menos de 8 caracteres!';
         return validatorPassword;
-    };
+    }
 
     // Validação para senha: 1 caracter minúsculo, 1 caracter maiusculo, 1 numero, e pelo menos 1 caracter especial (@, #, !, $, %), não pode conter espaços em branco
     if (!(regularExpressions().senha).test(value)) {
@@ -279,27 +295,29 @@ function isValidPassword (value) {
             1 caracter especial!
         `;
         return validatorPassword;
-    };
+    }
+
     return validatorPassword;
 };
 
 // Função para confirmar a senha
-function passwordConfirm (value) {
+function passwordConfirm (passwordValue, value) {
     const validatorPasswordConfirm = {
         isValidPassword: true,
         errorMessage: null
-    };
+    }
 
     if (isEmpty(value)) {
         validatorPasswordConfirm.isValidPassword = false;
         validatorPasswordConfirm.errorMessage = `Confimar senha é obrigatória!`;
         return validatorPasswordConfirm;
-    };
+    }
 
     if (passwordValue != value) {
         validatorPasswordConfirm.isValidPassword = false;
         validatorPasswordConfirm.errorMessage = `As senhas não condizem!`;
         return validatorPasswordConfirm;
     }
+
     return validatorPasswordConfirm;
 };
