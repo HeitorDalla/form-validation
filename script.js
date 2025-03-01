@@ -5,29 +5,38 @@ const form = document.querySelector("#form");
 form.addEventListener("submit", (evento) => {
     evento.preventDefault(); // Impede do formulário ser enviado automaticamente
 
-    // Pegar nome
+    // Nome
     const nome = document.querySelector("#inome");
     const nomeValue = nome.value;
+    
+    const inputBoxName = value.closest("#input-box");
+    const errorSpanName = inputBoxName.querySelector(".error");
 
-    // Pegar o local para mostrar o erro
-    const inputBox = nome.closest("#input-box");
-    const errorSpan = inputBox.querySelector(".error");
+    const iconError = '<i class="fa-solid fa-circle-exclamation"></i>';
 
-    // Ícone de erro
-    const iconError = // Colocar icone de erro
+    const nameValidation = IsValidName(nomeValue);
+    if (!nameValidation.isValid) { // Se ele não for válido
+        errorSpanName.innerHTML = `${iconError} ${validatorName.errorMassage}`;
+    };
 
-    // Pegar senha
-    const password = document.querySelector("#isenha");
-    const passwordValue = password.value;
+    // Sobrenome
+    const surname = document.querySelector("#isobrenome");
+    const surnameValue = surname.value;
 
+    const inputBoxSurname = value.closest("#input-box");
+    const errorSpanSurname = inputBoxSurname.querySelector(".error");
 
+    const surnameValidation = isValidSurname(surnameValue);
+    if (!surnameValidation.isValid) {
+        errorSpanSurname.innerHTML = `${iconError} ${validatorSurname.errorMassage}`;
+    };
 
-})
+});
 
 // Função para ver se o valor é vazio
 function isEmpty (value) {
     return value === ''; // Se o valor for vazio, ele retorna 'TRUE'
-}
+};
 
 // Função para validar o nome e sobrenome
 function IsValidName (value) {
@@ -44,7 +53,7 @@ function IsValidName (value) {
     }
 
     // Mensagem caso o campo tenha menos de 3 caracteres
-    const mim = 3;
+    const min = 3;
     if (value.length < min) {
         validatorName.isValid = false;
         validatorName.errorMassage = `O campo tem menos de ${min} caracteres!`;
@@ -69,7 +78,7 @@ function isValidSurname (value) {
     }
 
     // Função para o campo vazio
-    if (!isEmpty(value)) {
+    if (isEmpty(value)) {
         validatorSurname.isValid = false;
         validatorSurname.errorMassage = `O campo está vazio! Escreva!`;
         return validatorSurname;
