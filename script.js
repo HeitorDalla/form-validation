@@ -142,8 +142,10 @@ function isEmpty (value) {
 // Função para expressões regulares
 function regularExpressions () {
     return {
+        minName: /^[a-zA-Z]{3,}$/,
         apenasLetras: /^[a-zA-Z\s]+$/,
         senha: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/,
+        minPassword: /^[a-zA-Z]{8,}$/,
         email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         telefone: /^(?:\(\d{2}\)\s?)?\d{4,5}-\d{4}$/,
         hora: /./
@@ -165,10 +167,9 @@ function isValidName (value) {
     }
 
     // Mensagem caso o campo tenha menos de 3 caracteres
-    const min = 3;
-    if (value.length < min) {
+    if (value.length < (regularExpressions().minName).test(value)) {
         validatorName.isValid = false;
-        validatorName.errorMessage = `O campo tem menos de ${min} caracteres!`;
+        validatorName.errorMessage = `O campo tem que ter pelo menos 3 caracteres!`;
         return validatorName;
     }
 
@@ -294,8 +295,7 @@ function isValidPassword (value) {
         return validatorPassword;
     }
 
-    const min = 8;
-    if (value.length < min) {
+    if (value.length < (regularExpressions().minPassword).test(value)) {
         validatorPassword.isValid = false;
         validatorPassword.errorMessage = 'O campo possui menos de 8 caracteres!';
         return validatorPassword;
