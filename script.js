@@ -167,7 +167,7 @@ function isValidName (value) {
     }
 
     // Mensagem caso o campo tenha menos de 3 caracteres
-    if (value.length < (regularExpressions().minName).test(value)) {
+    if (!(regularExpressions().minName).exec(value)) {
         validatorName.isValid = false;
         validatorName.errorMessage = `O campo tem que ter pelo menos 3 caracteres!`;
         return validatorName;
@@ -198,10 +198,9 @@ function isValidSurname (value) {
     }
 
     // Função para ver o mínimo de caracteres
-    const min = 3;
-    if (value.length < min) {
+    if (!(regularExpressions().minName).exec(value)) {
         validatorSurname.isValid = false;
-        validatorSurname.errorMessage = `O mínimo de caracteres é ${min}!`;
+        validatorSurname.errorMessage = `O campo deve haves pelo menos 3 caracteres!`;
         return validatorSurname; 
     }
 
@@ -295,7 +294,7 @@ function isValidPassword (value) {
         return validatorPassword;
     }
 
-    if (value.length < (regularExpressions().minPassword).test(value)) {
+    if (!(regularExpressions().minPassword).exec(value)) {
         validatorPassword.isValid = false;
         validatorPassword.errorMessage = 'O campo possui menos de 8 caracteres!';
         return validatorPassword;
