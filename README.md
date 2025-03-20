@@ -14,6 +14,5 @@
 
 ## Contato
 - Criado por Heitor Giussani Dalla Villa
-- Entre em contato:
-E-mail: heitorvillavilla@gmail.com
-Linkedin: https://www.linkedin.com/in/heitordallavilla
+- E-mail: heitorvillavilla@gmail.com
+- Linkedin: https://www.linkedin.com/in/heitordallavilla
