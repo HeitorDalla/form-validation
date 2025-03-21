@@ -12,9 +12,9 @@
 - JavaScript - Implementa toda a lógica de validação dentro do formulárioe e a manipulação de eventos (https://www.javascript.com/)
 
 ### Exemplo de Uso
-1 - Insira os dados nos campos desejados
-2 - A medida em que se coloca as informações, as validações são feitas automaticamente 
-3 - O formulário só será enviado caso todas as validações forem feitas, de acordo com as regras ja estabelecidas dentro do software.
+- 1 - Insira os dados nos campos desejados
+- 2 - A medida em que se coloca as informações, as validações são feitas automaticamente 
+- 3 - O formulário só será enviado caso todas as validações forem feitas, de acordo com as regras ja estabelecidas dentro do software.
 
 ## Contato
 - Criado por Heitor Giussani Dalla Villa
