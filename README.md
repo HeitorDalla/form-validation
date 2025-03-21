@@ -7,9 +7,9 @@
 ## Tecnologias utilizadas
 ### Essse projeto foi desenvolvido seguindo as seguintes tecnologias:
 
-HTML - Estrutura o layout da página (https://html.com/) 
-CSS - Estiliza o layout (https://css.com/)
-JavaScript - Implementa toda a lógica de validação dentro do formulárioe e a manipulação de eventos (https://www.javascript.com/)
+- HTML - Estrutura o layout da página (https://html.com/) 
+- CSS - Estiliza o layout (https://css.com/)
+- JavaScript - Implementa toda a lógica de validação dentro do formulárioe e a manipulação de eventos (https://www.javascript.com/)
 
 ### Exemplo de Uso
 1 - Insira os dados nos campos desejados
